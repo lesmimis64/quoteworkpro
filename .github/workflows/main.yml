@@ -12,7 +12,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Extraire le projet
-        run: unzip QuoteWorkPro_Android.zip
+        run: run: ls && unzip *.zip
 
       - name: Télécharger Gradle
         run: |
