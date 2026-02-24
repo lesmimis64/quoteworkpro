@@ -5,28 +5,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      - name: Extraire le projet
-        run: run: ls && unzip *.zip
-
-      - name: Télécharger Gradle
-        run: |
-          wget https://services.gradle.org/distributions/gradle-8.2-bin.zip
-          unzip gradle-8.2-bin.zip
-          export PATH=$PATH:$(pwd)/gradle-8.2/bin
-
+      - name: Lister fichiers
+        run: ls
+      - name: Extraire ZIP
+        run: unzip *.zip
+      - name: Telecharger Gradle
+        run: wget https://services.gradle.org/distributions/gradle-8.2-bin.zip -O gradle.zip && unzip gradle.zip
       - name: Build APK
         run: |
           export PATH=$PATH:$(pwd)/gradle-8.2/bin
           cd QuoteWorkPro
           gradle assembleDebug
-
       - uses: actions/upload-artifact@v4
         with:
           name: apk
-          path: QuoteWorkPro/app/build/outputs/apk/debug/app-debug.apk
+          path: QuoteWorkPro/app/build/o
